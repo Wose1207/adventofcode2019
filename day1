@@ -1,0 +1,23 @@
+(* Problem one *)
+let rec fuel list sum=
+match list with
+  |[]->sum
+  |a::p->let plus = (a / 3) - 2 in fuel p (sum + plus);;
+
+let list = [];; (* Your imput *)
+let totalfuel = fuel list 0;;
+
+(* Problem two *)
+let totfuel int=
+  let tfuel = ref int in
+  let sum= ref 0 in
+while !tfuel > 8 do
+  let plus = ((!tfuel/3) -2) in sum := !sum + plus; tfuel := plus
+done; !sum;;
+
+let rec finalfuel list sum=
+match list with
+  |[]-> sum
+  |a::p->let plus = totfuel a in finalfuel p (sum + plus);;
+
+let ff = finalfuel list 0;;
