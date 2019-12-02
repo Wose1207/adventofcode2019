@@ -14,11 +14,12 @@ imputArray.(1)<-12;;
 imputArray.(2)<-2;;
 
 let simplify ar=
-for i=0 to (Array.length ar)/4 do
-if ar.(4*i)=99 then failwith "stop";
-if ar.(4*i)=1 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))+ar.(ar.((4*i)+2));
-if ar.(4*i)=2 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))*ar.(ar.((4*i)+2));
-done;ar.(0);;
+  for i=0 to (Array.length ar)/4 do
+    let j=4*i in
+    if ar.(j)=99 then failwith "stop";
+    if ar.(j)=1 then ar.(ar.((j)+3))<-ar.(ar.((j)+1))+ar.(ar.((j)+2));
+    if ar.(j)=2 then ar.(ar.((j)+3))<-ar.(ar.((j)+1))*ar.(ar.((j)+2));
+  done;ar.(0);;
 
 simplify imputArray;;
 imputArray.(0);;
@@ -34,15 +35,17 @@ match list with
 
 let simplify ar=
 for i=0 to (Array.length ar)/4 do
-if ar.(4*i)=99 then exit ar.(0);
-if ar.(4*i)=1 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))+ar.(ar.((4*i)+2));
-if ar.(4*i)=2 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))*ar.(ar.((4*i)+2));
+  let j=4*i in
+  if ar.(j)=99 then exit ar.(0);
+  if ar.(j)=1 then ar.(ar.((j)+3))<-ar.(ar.((j)+1))+ar.(ar.((j)+2));
+  if ar.(j)=2 then ar.(ar.((j)+3))<-ar.(ar.((j)+1))*ar.(ar.((j)+2));
 done;ar.(0);;
 
 let problem2 imputList=
-for i=0 to 99 do
-for j=0 to 99 do
-  let ar=Array.make (List.length imputList) 0 in remplirTableau ar imputList 0; ar.(1)<-i; ar.(2)<-j; if (simplify ar) = 19690720 then exit ((100*i) + j);
-done;done;;
+  for i=0 to 99 do
+    for j=0 to 99 do
+      let ar=Array.make (List.length imputList) 0 in remplirTableau ar imputList 0; ar.(1)<-i; ar.(2)<-j; if (simplify ar) = 19690720 then exit ((100*i) + j);
+    done;
+  done;;
 
 problem2 imputList;;
