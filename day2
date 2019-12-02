@@ -1,0 +1,23 @@
+let imputList = [];; (*Your imput*)
+
+let imputArray = Array.make (List.length imputList) 0;;
+
+let rec remplirTableau ar list i=
+match list with
+  |[]->ar
+  |a::p->ar.(i)<-a; remplirTableau ar p (i+1);;
+
+remplirTableau imputArray imputList 0;;
+
+imputArray.(1)<-12;;
+imputArray.(2)<-2;;
+
+let simplify ar=
+for i=0 to (Array.length ar)/4 do
+if ar.(4*i)=99 then failwith "stop";
+if ar.(4*i)=1 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))+ar.(ar.((4*i)+2));
+if ar.(4*i)=2 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))*ar.(ar.((4*i)+2));
+done;ar.(0);;
+
+simplify imputArray;;
+imputArray.(0);;
