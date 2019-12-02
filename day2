@@ -42,10 +42,13 @@ for i=0 to (Array.length ar)/4 do
 done;ar.(0);;
 
 let problem2 imputList=
-  for i=0 to 99 do
-    for j=0 to 99 do
-      let ar=Array.make (List.length imputList) 0 in remplirTableau ar imputList 0; ar.(1)<-i; ar.(2)<-j; if (simplify ar) = 19690720 then exit ((100*i) + j);
-    done;
-  done;;
+for i=0 to 99 do
+for j=0 to 99 do
+  let ar=Array.make (List.length imputList) 0 in remplirTableau ar imputList 0; ar.(1)<-i; ar.(2)<-j; 
+match (simplify ar) with 
+    |19690720->print_int ((100*i) + j)
+    |_->();
+done;done;;
 
 problem2 imputList;;
+
