@@ -25,3 +25,24 @@ imputArray.(0);;
 
 (*Problem two*)
 
+let imputList = [1;0;0;3;1;1;2;3;1;3;4;3;1;5;0;3;2;1;9;19;1;10;19;23;2;9;23;27;1;6;27;31;2;31;9;35;1;5;35;39;1;10;39;43;1;10;43;47;2;13;47;51;1;10;51;55;2;55;10;59;1;9;59;63;2;6;63;67;1;5;67;71;1;71;5;75;1;5;75;79;2;79;13;83;1;83;5;87;2;6;87;91;1;5;91;95;1;95;9;99;1;99;6;103;1;103;13;107;1;107;5;111;2;111;13;115;1;115;6;119;1;6;119;123;2;123;13;127;1;10;127;131;1;131;2;135;1;135;5;0;99;2;14;0;0];; (*Your imput*)
+
+let rec remplirTableau ar list i=
+match list with
+  |[]->()
+  |a::p->ar.(i)<-a; remplirTableau ar p (i+1);;
+
+let simplify ar=
+for i=0 to (Array.length ar)/4 do
+if ar.(4*i)=99 then exit ar.(0);
+if ar.(4*i)=1 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))+ar.(ar.((4*i)+2));
+if ar.(4*i)=2 then ar.(ar.((4*i)+3))<-ar.(ar.((4*i)+1))*ar.(ar.((4*i)+2));
+done;ar.(0);;
+
+let problem2 imputList=
+for i=0 to 99 do
+for j=0 to 99 do
+  let ar=Array.make (List.length imputList) 0 in remplirTableau ar imputList 0; ar.(1)<-i; ar.(2)<-j; if (simplify ar) = 19690720 then exit ((100*i) + j);
+done;done;;
+
+problem2 imputList;;
