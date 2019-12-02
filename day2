@@ -1,3 +1,4 @@
+(*Problem one*)
 let imputList = [];; (*Your imput*)
 
 let imputArray = Array.make (List.length imputList) 0;;
@@ -21,3 +22,6 @@ done;ar.(0);;
 
 simplify imputArray;;
 imputArray.(0);;
+
+(*Problem two*)
+
